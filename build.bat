@@ -26,7 +26,7 @@ if %errorlevel% neq 0 (
 )
 
 echo Building executable...
-pyinstaller --onefile --windowed --noconfirm --name ProgramExporter --icon=icons/program.png --add-data "icons;icons" v2.py
+pyinstaller --onefile --windowed --noconfirm --name ProgramExporter --icon=icons/program.png --add-data "icons;icons" main.py
 if %errorlevel% neq 0 (
     echo ERROR: PyInstaller failed to build the executable.
     pause
