@@ -15,7 +15,7 @@ def work(icon_key):
             center_click(DELAY, t_center, 'double')
             center_click(DELAY, t_center, 'right')
             export_sequence()
-            center_click(0.15, t_center, 'double')
+            center_click(DELAY, t_center, 'double')
             time.sleep(0.1)
             processed_targets.append((t_center.x, t_center.y))
             time.sleep(DELAY)
