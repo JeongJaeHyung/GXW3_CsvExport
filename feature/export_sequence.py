@@ -1,24 +1,26 @@
-from package.wait_found_this import wait_found_this # 임포트 방식 통일
-from package.key_press import key_press, hotkey_press
-from package.center_click import center_click
-from core import DELAY
+from package.key_press import Waited, Found
+from package.click import Waited as C_Waited
+from package.click import Found as C_Found
+#from core import DELAY
 
-def work():
-    export_speed = 0.05
+def work(t_center):
+    #export_speed = 0.05
+    # 작업 전 환경조건 개선
+    Waited.hotkey_press(['ctrl', 'shift', 'q'])
+    C_Waited.double_click(t_center)
+    C_Waited.right_click(t_center)
+
     # 우클릭 후 나타난 메뉴에서 키보드로 선택
-    key_press(export_speed, 'e') # Export to File
-    key_press(export_speed, 'down') # 하위 항목 이동
-    key_press(export_speed, 'enter') 
-    
-    # "Warning" 팝업 혹은 완료창 대기
-    wait_found_this("Warning")
+    Waited.key_press('e') # Export to File
+    Waited.key_press('down') # 하위 항목 이동
+    Waited.key_press('enter') 
     
     # 팝업 처리 시퀀스 (엔터 등)
-    key_press(export_speed, 'left')
-    key_press(export_speed, 'enter')
-    hotkey_press(export_speed, ['alt', 'tab']) # Select the
-    hotkey_press(export_speed, ['alt', 'tab']) # Save work window
-    key_press(export_speed, 'enter')
-    center_click(DELAY, t_center, 'double')
+    Found.key_press("Warning", 'left')
+    Waited.key_press('enter')
+    for _ in range(2):Waited.hotkey_press(['alt', 'tab']) # Save work window
+    Waited.key_press('enter')
+
+    C_Found.double_click("done", t_center)
     
     print(">>> [SUCCESS] Local Label 내보내기 완료")

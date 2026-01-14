@@ -1,6 +1,6 @@
 import pyautogui
-from package.center_click import center_click
-from core import ICONS, CONFIDENCE, DELAY
+from package.click import Waited
+from package.get_location import Get
 
 
 
@@ -9,12 +9,12 @@ def expand_all_of(icon_key):
     while True:
         try:
             # 매번 화면을 새로 스캔하여 첫 번째 항목만 찾음
-            item = pyautogui.locateCenterOnScreen(ICONS[icon_key], confidence=CONFIDENCE)
-            if not item:
+            location = Get.center_location(icon_key)
+            if not location:
                 break # 더 이상 열 항목이 없으면 루프 탈출
             
             print(f"[{icon_key.upper()}] 확장 중...")
-            center_click(DELAY, item, 'double')
+            Waited.double_click(location)
 
         except pyautogui.ImageNotFoundException:
             break

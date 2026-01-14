@@ -28,4 +28,5 @@ ICONS = {
     "target":  resource_path('icons/target.png'),
     "Local Labels": resource_path('icons/Local Label.png'),
     "Warning": resource_path('icons/Warning.png'),
+    "done": resource_path('icons/done.png')
 }
