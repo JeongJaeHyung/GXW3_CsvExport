@@ -1,32 +1,44 @@
-import pyautogui
 import time
-from feature.expand_all_of import expand_all_of
-from feature.main_workflow import work as main_workflow
-from core import DELAY
+import sequence
+from core import DEFAULT_DELAY
+
+
+from module import Found, Just
+
+
+def tmp():
+    Found.key_press("information1", "enter")
+    Found.key_press("information2", "enter")
+    Found.key_press("warning", "enter")
+    Just.key_press("enter")
+    Just.key_press("f4")
+    Just.hotkey_press(['ctrl', 'shift', 'q'])
+    Just.key_press("enter")
 
 def export2csv():
     # Workflow 1~4
     print(">>> [WORKFLOW 1] 시작")
-    expand_all_of("program")
-    time.sleep(DELAY)
+    sequence.open_tree("program")
+    time.sleep(DEFAULT_DELAY)
 
     print(">>> [WORKFLOW 2] 시작")
-    expand_all_of("scan")
-    time.sleep(DELAY)
+    sequence.open_tree("scan")
+    time.sleep(DEFAULT_DELAY)
 
     print(">>> [WORKFLOW 3] 시작")
-    expand_all_of("unit")
-    time.sleep(DELAY)
+    sequence.open_tree("unit")
+    time.sleep(DEFAULT_DELAY)
 
     print(">>> [WORKFLOW 4] 시작")
-    expand_all_of("folder")
-    time.sleep(DELAY)
+    sequence.open_tree("folder")
+    time.sleep(DEFAULT_DELAY)
 
     print(">>> [WORKFLOW 5] 시작")
-    main_workflow("target")
-    time.sleep(DELAY)
+    sequence.open_program_block("target")
+    time.sleep(DEFAULT_DELAY)
     
     print(">>> 모든 작업 완료!")
         
 if __name__ == "__main__":
+    #tmp()
     export2csv()

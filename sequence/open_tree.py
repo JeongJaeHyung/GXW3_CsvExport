@@ -1,10 +1,7 @@
 import pyautogui
-from package.click import Waited
-from package.get_location import Get
+from module import Waited, Get
 
-
-
-def expand_all_of(icon_key):
+def work(icon_key):
     """지정한 아이콘([+] 상태)이 화면에서 더 이상 발견되지 않을 때까지 반복 확장"""
     while True:
         try:
