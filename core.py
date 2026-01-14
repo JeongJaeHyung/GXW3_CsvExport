@@ -25,5 +25,7 @@ ICONS = {
     "scan":    resource_path('icons/scan.png'),
     "unit":    resource_path('icons/unit.png'),
     "folder":  resource_path('icons/folder.png'),
-    "target":  resource_path('icons/target.png')
+    "target":  resource_path('icons/target.png'),
+    "Local Labels": resource_path('icons/Local Label.png'),
+    "Warning": resource_path('icons/Warning.png'),
 }
