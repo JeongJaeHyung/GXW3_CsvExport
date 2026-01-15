@@ -1,15 +1,13 @@
 import time
-import sequence
-from core import DEFAULT_DELAY
+from action import PreWork, GeneralWork
+from module import Found
 
 
-from module import Found, Just
-
-
+"""
 def tmp():
-    Found.key_press("information1", "enter")
-    Found.key_press("information2", "enter")
-    Found.key_press("warning", "enter")
+    Waited.Found.key_press("information1", "enter")
+    Waited.Found.key_press("information2", "enter")
+    Waited.Found.key_press("warning", "enter")
     Just.key_press("enter")
     Just.key_press("f4")
     Just.hotkey_press(['ctrl', 'shift', 'q'])
@@ -38,7 +36,16 @@ def export2csv():
     time.sleep(DEFAULT_DELAY)
     
     print(">>> 모든 작업 완료!")
+
+if __name__ == "__main__":
+    #PreWork.work_space_setting
+    #ShareWork.compile
+    time.sleep(3)
+    GeneralWork.open_tree
+"""
         
 if __name__ == "__main__":
-    #tmp()
-    export2csv()
+    time.sleep(3)
+    #PreWork.work_space_setting()
+    PreWork.before_sequence()
+    GeneralWork.open_tree()

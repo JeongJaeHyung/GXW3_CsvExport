@@ -1,6 +1,6 @@
 import pyautogui
 import time
-from core import DEFAULT_DELAY, KEY_PRESS_DELAY
+from core import DEFAULT_DELAY, KEY_PRESS_DELAY, DEFAULT_TIMEOUT
 from . import screen
 
 
@@ -46,11 +46,11 @@ class Waited:
 # ==============================================================================================================
 class Found:
     @staticmethod
-    def key_press(icon_key, key):
-        if screen.Found.icon(icon_key):
+    def key_press(icon_key, key, timeout=DEFAULT_TIMEOUT):
+        if screen.Found.icon(icon_key, timeout):
             Just.key_press(key)
     
     @staticmethod
-    def hotkey_press(icon_key, hotkey_list):
-        if screen.Found.icon(icon_key):
+    def hotkey_press(icon_key, hotkey_list, timeout=DEFAULT_TIMEOUT):
+        if screen.Found.icon(icon_key, timeout):
             Just.hotkey_press(hotkey_list)

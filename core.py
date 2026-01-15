@@ -8,8 +8,9 @@ CONFIDENCE = float(os.getenv('CONFIDENCE'))
 DEFAULT_DELAY = float(os.getenv('DEFAULT_DELAY'))
 KEY_PRESS_DELAY = float(os.getenv('KEY_PRESS_DELAY'))
 
-SEQUENCE_DELAY = float(os.getenv('SEQUENCE_DELAY'))
-SEQUENCE_TIMEOUT = float(os.getenv('SEQUENCE_TIMEOUT'))
+DEFAULT_TIMEOUT = float(os.getenv('DEFAULT_TIMEOUT'))
+NODE_OPEN_TIMEOUT = float(os.getenv('NODE_OPEN_TIMEOUT'))
+
 
 processed_targets = []
 
@@ -30,17 +31,20 @@ ICONS = {
     "warning": resource_path('icons/StartSequence/warning.png'),
     "properties": resource_path('icons/StartSequence/properties.png'),
 
-    # main seuence icons
-    "program": resource_path('icons/SequenceAssets/program.png'),
-    "scan": resource_path('icons/SequenceAssets/scan.png'),
-    "unit": resource_path('icons/SequenceAssets/unit.png'),
-    "folder": resource_path('icons/SequenceAssets/folder.png'),
-    "target": resource_path('icons/SequenceAssets/target.png'),
-    "Local Labels": resource_path('icons/SequenceAssets/Local Label.png'),
-    "Warning": resource_path('icons/SequenceAssets/Warning.png'),
-    "done": resource_path('icons/SequenceAssets/done.png'),
+    # Sequence Control icons
+    "Navigation": resource_path('icons/NonActiveNavigation.png'),
+    "Parameter": resource_path('icons/ActiveClosedParameter.png'),
+    "Warning": resource_path('icons/Warning.png'),
+    "ProgramBody": resource_path('icons/ProgramBody.png'),
+    
+    
+    # Node icons
+    "Project": resource_path('icons/ActiveProject.png'),
+    "Program": resource_path('icons/ActiveClosedProgram.png'),
+    "Scan": resource_path('icons/ActiveClosedScan.png'),
+    "Unit": resource_path('icons/ActiveClosedUnit.png'),
+    "Folder": resource_path('icons/ActiveClosedFolder.png'),
+    "ProgramBlock1": resource_path('icons/ActiveClosedProgramBlock.png'),
+    "ProgramBlock2": resource_path('icons/ActiveOpenProgramBlock.png'),
 
-    # etc
-    "end": resource_path('icons/etc/end.png'),
-    "scroll": resource_path('icons/etc/scroll.png')
 }

@@ -1,35 +1,43 @@
-# Project/package/__init__.py
-from . import keyboard as kp
-from . import mouse as cl
-from . import screen as ic
-from . import location as lc
+# Project/module/__init__.py
+from . import keyboard
+from . import mouse
+from . import screen
+from . import location
 
 
-# 패키지 레벨에서 바로 접근 가능한 통합 클래스 정의
+
 class Just:
-    key_press = kp.Just.key_press
-    hotkey_press = kp.Just.hotkey_press
-    # 마우스 Just 기능이 click.py에 있다면 추가
+    key_press = keyboard.Just.key_press
+    hotkey_press = keyboard.Just.hotkey_press
+    click = mouse.Just.click
+    double_click = mouse.Just.double_click
+    right_click = mouse.Just.right_click
+
+
 
 class Waited:
-    # 키보드 동작
-    key_press = kp.Waited.key_press
-    hotkey_press = kp.Waited.hotkey_press
-    
-    # 마우스 동작
-    double_click = cl.Waited.double_click
-    right_click = cl.Waited.right_click
+    key_press = keyboard.Waited.key_press
+    hotkey_press = keyboard.Waited.hotkey_press
+    click = mouse.Waited.click
+    double_click = mouse.Waited.double_click
+    right_click = mouse.Waited.right_click
+
+
+    class Found:
+        icon = screen.Found.icon
+        key_press = keyboard.Found.key_press
+        hotkey_press = keyboard.Found.hotkey_press
+
+
 
 class Found:
-    icon = ic.Found.icon
-    # Key_press's
-    key_press = kp.Found.key_press
-    hotkey_press = kp.Found.hotkey_press
-    
-    # click's
-    double_click = cl.Found.double_click
+    icon = screen.Found.icon
+    icon_list = screen.Found.icon_list
+    click = mouse.Found.click
+    double_click = mouse.Found.double_click
+    right_click = mouse.Found.right_click
 
 
 
 class Get:
-    center_location = lc.Get.center_location
+    center_location = location.Get.center_location

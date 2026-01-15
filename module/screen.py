@@ -1,9 +1,9 @@
 import time
 import pyautogui
-from core import ICONS, CONFIDENCE, DEFAULT_DELAY
+from core import ICONS, CONFIDENCE, DEFAULT_TIMEOUT
 
 class Found():
-    def icon(icon_key, timeout=3):
+    def icon(icon_key, timeout=DEFAULT_TIMEOUT):
         start_time = time.time()
         print(f">>> [{icon_key}] 대기 시작...")
 
@@ -24,4 +24,11 @@ class Found():
                 print(f"!!! {timeout}초 동안 [{icon_key}] 버튼이 나타나지 않았습니다.")
                 return None  # 실패 시 None 반환
                 
-            time.sleep(DEFAULT_DELAY)
+            time.sleep(DEFAULT_TIMEOUT)
+    
+    def icon_list(icon_key, timeout=DEFAULT_TIMEOUT):
+        for key in icon_key:
+            confirm_btn = Found.icon(key, timeout)
+            if confirm_btn is not None:
+                return confirm_btn, key
+        return None
