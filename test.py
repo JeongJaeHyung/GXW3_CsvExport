@@ -1,12 +1,13 @@
-node_list = [
-    "Program",
-    "Scan",
-    "Unit",
-    "Folder",
-    "ProgramBlock1",
-    "ProgramBlock2",
-    "Parameter",
-]
-status = 0
+from module import Waited, Get, Found
 
-print(node_list[status:])
+def work():
+    print("LOG: before_sequence.work() called")
+    Waited.click(Get.center_location("GXW2_Navigation"), 0.05)
+    Waited.key_press('up')
+    while True:
+        Waited.key_press('pageup')
+        if Found.icon('GXW2_Parameter') is not None:
+            print("--------------------------------------GXW2 Parameter Found")
+            return
+
+work()

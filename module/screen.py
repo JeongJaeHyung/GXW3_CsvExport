@@ -1,34 +1,36 @@
+import logging
 import time
 import pyautogui
-from core import ICONS, CONFIDENCE, DEFAULT_TIMEOUT
+from core import ICONS, CONFIDENCE, DEFAULT_TIMEOUT 
+
+logging.basicConfig(level=logging.INFO, format='%(message)s')
 
 class Found():
-    def icon(icon_key, timeout=DEFAULT_TIMEOUT):
+    @staticmethod
+    def icon(icon_key, timeout=DEFAULT_TIMEOUT, confidence=CONFIDENCE):
+        logging.info(f"LOG: screen.Found.icon(icon_key={icon_key}, timeout={timeout}, confidence={confidence}) called")
         start_time = time.time()
-        print(f">>> [{icon_key}] 대기 시작...")
 
         while True:
             try:
-                # 이미지 찾기 시도
-                confirm_btn = pyautogui.locateCenterOnScreen(ICONS[icon_key], confidence=CONFIDENCE)
+                confirm_btn = pyautogui.locateCenterOnScreen(ICONS[icon_key], confidence=confidence)
                 
                 if confirm_btn:
-                    print(f"found it! 위치: {confirm_btn}")
-                    return confirm_btn  # 성공 시 좌표 반환
+                    return confirm_btn
             
             except pyautogui.ImageNotFoundException:
                 pass
             
-            # 타임아웃 체크
             if time.time() - start_time > timeout:
-                print(f"!!! {timeout}초 동안 [{icon_key}] 버튼이 나타나지 않았습니다.")
-                return None  # 실패 시 None 반환
-                
-            time.sleep(DEFAULT_TIMEOUT)
+                return None
+            
+            time.sleep(0.1) 
     
-    def icon_list(icon_key, timeout=DEFAULT_TIMEOUT):
-        for key in icon_key:
-            confirm_btn = Found.icon(key, timeout)
+    @staticmethod
+    def icon_list(icon_key_list, timeout=0):
+        logging.info(f"LOG: screen.Found.icon_list(icon_key_list={icon_key_list}, timeout={timeout}) called")
+        for key in icon_key_list:
+            confirm_btn = Found.icon(key, timeout=timeout)
             if confirm_btn is not None:
                 return confirm_btn, key
         return None

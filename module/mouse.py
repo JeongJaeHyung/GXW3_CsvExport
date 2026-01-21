@@ -12,13 +12,19 @@ from . import screen
 # ==============================================================================================================
 class Just:
     @staticmethod
-    def click(location): pyautogui.click(location)
+    def click(location): 
+        print(f"LOG: mouse.Just.click(location={location}) called")
+        pyautogui.click(location)
     
     @staticmethod
-    def double_click(location): pyautogui.doubleClick(location)
+    def double_click(location): 
+        print(f"LOG: mouse.Just.double_click(location={location}) called")
+        pyautogui.doubleClick(location)
     
     @staticmethod
-    def right_click(location): pyautogui.rightClick(location)
+    def right_click(location): 
+        print(f"LOG: mouse.Just.right_click(location={location}) called")
+        pyautogui.rightClick(location)
 
 
 
@@ -28,16 +34,19 @@ class Just:
 class Waited:
     @staticmethod
     def click(location, interval=DEFAULT_DELAY):
+        print(f"LOG: mouse.Waited.click(location={location}, interval={interval}) called")
         time.sleep(interval)
         Just.click(location)
 
     @staticmethod
     def double_click(location, interval=DEFAULT_DELAY):
+        print(f"LOG: mouse.Waited.double_click(location={location}, interval={interval}) called")
         time.sleep(interval)
         Just.double_click(location)
 
     @staticmethod
     def right_click(location, interval=DEFAULT_DELAY):
+        print(f"LOG: mouse.Waited.right_click(location={location}, interval={interval}) called")
         time.sleep(interval)
         Just.right_click(location)
 
@@ -49,21 +58,18 @@ class Waited:
 class Found:
     @staticmethod
     def click(icon_key, location):
+        print(f"LOG: mouse.Found.click(icon_key={icon_key}, location={location}) called")
         if screen.Found.icon(icon_key):
             Just.click(location)
-        else:
-            print(f"!!! [Found] {icon_key}를 찾지 못해 클릭을 취소합니다.")
 
     @staticmethod
     def double_click(icon_key, location):
+        print(f"LOG: mouse.Found.double_click(icon_key={icon_key}, location={location}) called")
         if screen.Found.icon(icon_key):
             Just.double_click(location)
-        else:
-            print(f"!!! [Found] {icon_key}를 찾지 못해 더블클릭을 취소합니다.")
 
     @staticmethod
     def right_click(icon_key, location):
+        print(f"LOG: mouse.Found.right_click(icon_key={icon_key}, location={location}) called")
         if screen.Found.icon(icon_key):
             Just.right_click(location)
-        else:
-            print(f"!!! [Found] {icon_key}를 찾지 못해 우클릭을 취소합니다.")
