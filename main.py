@@ -1,16 +1,15 @@
 import os
 import sys
-import time
 from datetime import datetime
 from PyQt6.QtWidgets import QApplication, QMainWindow, QVBoxLayout, QWidget, QLabel
 from PyQt6.QtCore import QThread, pyqtSignal
 from PyQt6.QtGui import QColor
 
 import core
-from action import PreWork, GeneralWork, ShareWork
 from UI.widget.top_section import TopSectionWidget
 from UI.widget.bottom_section import BottomSectionWidget
 from UI.elements.progress_bar import ProgressBarElement
+from UI.template.gxw3_automation import GXW3AutomationTemplate
 
 class AutomationWorker(QThread):
     file_progress = pyqtSignal(int)
@@ -21,49 +20,20 @@ class AutomationWorker(QThread):
         super().__init__()
         self.files = files
         self.session_dir = session_dir
+        # UI 제어 권한을 가진 템플릿 생성
+        self.template = GXW3AutomationTemplate(self)
 
     def run(self):
         total_files = len(self.files)
-        
         for idx, file_path in enumerate(self.files):
             try:
-                # [폴더 생성] 파일명으로 하위 폴더 생성 (확장자 제외)
-                file_name_only = os.path.splitext(os.path.basename(file_path))[0]
-                target_file_dir = os.path.join(self.session_dir, file_name_only)
-                os.makedirs(target_file_dir, exist_ok=True)
-
-                print(target_file_dir)
-                
-                # core.py에 현재 작업 폴더 정보 업데이트
-                core.CURRENT_EXPORT_DIR = target_file_dir
-                
-                self.status_update.emit(idx, "작업중", QColor("#f1c40f"))
-                
-                os.startfile(file_path)
-                time.sleep(5) 
-                
-                core.processed_targets = []
-                
-                # 자동화 시퀀스 실행
-                self.file_progress.emit(10)
-                PreWork.work_space_setting()
-                
-                self.file_progress.emit(30)
-                PreWork.before_sequence()
-                
-                self.file_progress.emit(50)
-                ShareWork.compile.work()
-                
-                self.file_progress.emit(80)
-                GeneralWork.open_tree()
-                
-                self.status_update.emit(idx, "작업 완료", QColor("#2ecc71"))
-                self.file_progress.emit(100)
-
+                # 템플릿에 전체 워크플로우 실행 위임
+                self.template.run_workflow(idx, file_path, self.session_dir)
             except Exception as e:
                 print(f"!!! [{os.path.basename(file_path)}] 에러 발생: {e}")
                 self.status_update.emit(idx, "실패", QColor("#e74c3c"))
             
+            # 전체 진행도는 Worker에서 직접 관리
             self.total_progress.emit(int((idx + 1) / total_files * 100))
 
 class MainApp(QMainWindow):
@@ -94,16 +64,13 @@ class MainApp(QMainWindow):
         self.bottom_section.run_btn.clicked.connect(self.start_automation_workflow)
 
     def start_automation_workflow(self):
-        """0. 작업 시작 시 설정 저장 및 폴더 트리 생성"""
         self.top_section.config_table.save_to_env_file()
         
-        # 대상 루트 폴더 경로 확인
         root_export_path = self.bottom_section.path_selector.get_path()
         if not root_export_path or not os.path.exists(root_export_path):
             print(">>> [오류] 유효한 대상 폴더를 선택해주세요.")
             return
 
-        # YYYYMMDD_HHMM_GXW3 세션 폴더 생성
         folder_name = datetime.now().strftime("%Y%m%d_%H%M_GXW3")
         session_dir = os.path.join(root_export_path, folder_name)
         os.makedirs(session_dir, exist_ok=True)

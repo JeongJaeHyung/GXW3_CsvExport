@@ -33,12 +33,16 @@ def work():
             print(f"<<<<<<<<<<<<<<<<<<<<<{target} Found!>>>>>>>>>")
 
             if target in ICON.GXW3.Parameter:
+                print("--------------------------------------Parameter Found")
+                Just.hotkey_press(['alt', 'f4'])
                 return
             
             elif target in programblock:
+                print("--------------------------------------ProgramBlock Found")
                 ExportWork(position)
 
             elif target in base_nodes:
+                print("--------------------------------------Base Node Found")
                 Just.key_press('enter')
                 if target == ICON.GXW3.Scan:
                     start_point, end_point = 2, 9

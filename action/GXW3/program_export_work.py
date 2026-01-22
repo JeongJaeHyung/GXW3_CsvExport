@@ -1,6 +1,6 @@
-from core import CURRENT_EXPORT_DIR, ICON
-import pyperclip
+from core import ICON
 from module import Waited, Found
+from .file_path_setting import work as PathSetting
 
 
 def work(t_center):
@@ -14,24 +14,14 @@ def work(t_center):
     Waited.key_press('e')
     Waited.key_press('down')
     Waited.key_press('enter')
-    if Found.icon(ICON.GXW3.Statement) is not None:
+    if Found.icon(ICON.Error.Information2) is not None:
         print("│  │     ├─<Statement Error!>")
         Waited.key_press('enter')
     
-    Waited.Found.key_press(ICON.GXW3.Warning, 'left', 5, 0.8)
+    Waited.Found.key_press(ICON.Error.Warning1, 'left', 5, 0.8)
     Waited.key_press('enter', 0.05)
-
-    Waited.click(Found.icon(ICON.ETC.WindowsFolder))
-    print(f"CURRENT_EXPORT_DIR : {CURRENT_EXPORT_DIR}")
-    pyperclip.copy(CURRENT_EXPORT_DIR)
-    Waited.hotkey_press(['ctrl', 'v'])
-
-    Waited.hotkey_press(['alt', 'tab'])
-    Waited.hotkey_press(['alt', 'tab'])
-
-    Waited.key_press('enter', 0.05)
-
-    if Found.icon(ICON.GXW3.Warning) is not None:
+    PathSetting()
+    if Found.icon(ICON.Error.Warning1) is not None:
         print("│  │     ├─<CSV is already saved!>")
         Waited.key_press('enter')
         Waited.key_press('esc')

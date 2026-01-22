@@ -1,8 +1,9 @@
-from module import Waited, Found
 import time
-import pyperclip
-from core import CURRENT_EXPORT_DIR, ICON
+import threading
+from module import Waited, Found
+from .comment_move import work as CommentMove
 
+from core import ICON
 
 def work(t_center):
     print("LOG: program_export_work.work() called")
@@ -13,20 +14,15 @@ def work(t_center):
     Waited.key_press('left')
     Waited.key_press('enter')
 
-    Waited.key_press('f')
-    print(f"CURRENT_EXPORT_DIR : {CURRENT_EXPORT_DIR}")
-    pyperclip.copy(CURRENT_EXPORT_DIR)
-    Waited.hotkey_press(['ctrl', 'v'])
     Waited.key_press('enter')
+
     Waited.key_press('enter')
 
     while True:
-        if Found.icon(ICON.GXW3.Navigation) is not None:
+        if (position := Found.icon(ICON.GXW3.Comment)) is not None:
+            move_thread = threading.Thread(target=CommentMove, daemon=True)
+            move_thread.start()
+            Waited.click(position)
             break
         else:
             time.sleep(0.5)
-            
-    Waited.click(Found.icon(ICON.GXW3.Navigation))
-    
-
-    

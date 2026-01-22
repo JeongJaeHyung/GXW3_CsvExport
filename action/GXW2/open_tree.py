@@ -1,7 +1,9 @@
 from module import Found, Just
-from program_export_work import work as ProgramExportWork
-#from device_export_work import work as DeviceExportWork
-from core import ICON
+from .program_export_work import work as ProgramExportWork
+from .comment_export_work import work as CommentExportWork
+from .bring_to_folder import work as BringToFolder
+
+from core import ICON, NODE_OPEN_TIMEOUT
 
 def work():
     node_list = [
@@ -17,10 +19,11 @@ def work():
     while True:
         Just.key_press("down")
 
-        if (result := Found.icon_list(node_list, 1)) is not None:
+        if (result := Found.icon_list(node_list, NODE_OPEN_TIMEOUT)) is not None:
             position, target = result
 
             if target in ICON.GXW2.END:
+                BringToFolder()
                 return
             
             elif target in ICON.GXW2.Program:
@@ -28,7 +31,7 @@ def work():
 
 
             elif target in ICON.GXW2.GlobalDeviceComment:
-                pass
+                CommentExportWork(position)
 
             elif target in base_nodes:
                 Just.key_press('right')
