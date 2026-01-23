@@ -19,7 +19,7 @@ def work(t_center):
     Waited.key_press('enter')
 
     while True:
-        if (position := Found.icon(ICON.GXW3.Comment)) is not None:
+        if (position := Found.icon(ICON.GXW3.Navigation)) is not None:
             move_thread = threading.Thread(target=CommentMove, daemon=True)
             move_thread.start()
             Waited.click(position)

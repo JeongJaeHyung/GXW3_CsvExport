@@ -41,6 +41,10 @@ class FileTableElement(QTableWidget):
             if path.endswith('.gx3'):
                 paths.append(path)
                 self.add_file_row(path) # 테이블에 행 추가 로직 호출
+                
+            if path.endswith('.gxw'):
+                paths.append(path)
+                self.add_file_row(path) # 테이블에 행 추가 로직 호출
         
         if paths:
             self.files_dropped.emit(paths)
