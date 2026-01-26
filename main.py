@@ -9,7 +9,9 @@ import core
 from UI.widget.top_section import TopSectionWidget
 from UI.widget.bottom_section import BottomSectionWidget
 from UI.elements.progress_bar import ProgressBarElement
+from UI.template.gxw2_automation import GXW2AutomationTemplate
 from UI.template.gxw3_automation import GXW3AutomationTemplate
+
 
 class AutomationWorker(QThread):
     file_progress = pyqtSignal(int)
@@ -20,15 +22,26 @@ class AutomationWorker(QThread):
         super().__init__()
         self.files = files
         self.session_dir = session_dir
-        # UI 제어 권한을 가진 템플릿 생성
-        self.template = GXW3AutomationTemplate(self)
+        # 인스턴스 변수로 template을 미리 선언하지 않고 run에서 결정합니다.
 
     def run(self):
         total_files = len(self.files)
         for idx, file_path in enumerate(self.files):
             try:
-                # 템플릿에 전체 워크플로우 실행 위임
-                self.template.run_workflow(idx, file_path, self.session_dir)
+                # 1. 파일 확장자 추출 (소문자로 변환하여 비교)
+                _, ext = os.path.splitext(file_path)
+                ext = ext.lower()
+
+                # 2. 확장자에 따라 적절한 템플릿 선택 (Factory 로직)
+                if ext == '.gxw':
+                    current_template = GXW2AutomationTemplate(self)
+                else:
+                    # 기본적으로 .gx3 등은 기존 GXW3 템플릿 사용
+                    current_template = GXW3AutomationTemplate(self)
+
+                # 3. 선택된 템플릿에 전체 워크플로우 실행 위임
+                current_template.run_workflow(idx, file_path, self.session_dir)
+
             except Exception as e:
                 print(f"!!! [{os.path.basename(file_path)}] 에러 발생: {e}")
                 self.status_update.emit(idx, "실패", QColor("#e74c3c"))

@@ -17,6 +17,7 @@ EXPORT_PATH = os.getenv('EXPORT_PATH', '')
 # [추가] 현재 파일의 결과물이 저장될 실제 경로
 CURRENT_EXPORT_DIR = ""
 
+
 processed_targets = []
 
 def save_setting_to_env(key, value):
@@ -60,23 +61,27 @@ class ICON:
         Scan = resource_path('icons/GXW3/ActiveClosedScan.png')
         Unit = resource_path('icons/GXW3/ActiveClosedUnit.png')
         Folder = resource_path('icons/GXW3/ActiveClosedFolder.png')
+        ProgramBlock = resource_path('icons/GXW3/ActiveProgramBlock.png')
         ProgramBlock1 = resource_path('icons/GXW3/ActiveClosedProgramBlock.png')
         ProgramBlock2 = resource_path('icons/GXW3/ActiveOpenProgramBlock.png')
 
         Device = resource_path('icons/GXW3/ActiveClosedDevice.png')
         Comment = resource_path('icons/GXW3/ActiveDeviceComment.png')
 
+
     class GXW2:
+        ProjectProperty = resource_path('icons/GXW2/ProjectProperty.png')
         Parameter = resource_path('icons/GXW2/ActiveParameter.png')
         Navigation = resource_path('icons/GXW2/Navigation.png')
         GlobalDeviceComment = resource_path('icons/GXW2/GlobalDeviceComment.png')
-        ProgramSetting = resource_path('icons/GXW2/ProgramSetting.png')
+        PS = resource_path('icons/GXW2/ProgramSetting.png')
         Scan = resource_path('icons/GXW2/Scan.png')
         Unit = resource_path('icons/GXW2/ActiveClosedUnit.png')
-        Program = resource_path('icons/GXW2/ActiveProgram.png')
-        END = resource_path('icons/GXW2/END.png')
-
-        Warning = resource_path('icons/GXW2/Error/Warning.png')
+        POU = resource_path('icons/GXW2/ProgramOfUnit.png')
+        PF = resource_path('icons/GXW2/ProgramFolder.png')
+        Program1 = resource_path('icons/GXW2/ActiveProgram1.png')
+        Program2 = resource_path('icons/GXW2/ActiveProgram2.png')
+        DeviceInitialValue = resource_path('icons/GXW2/DeviceInitialValue.png')
 
 
     class ETC:
@@ -89,12 +94,3 @@ class ICON:
         Information1 = resource_path('icons/Error/Information1.png')
         Information2 = resource_path('icons/Error/Information2.png')
         Information3 = resource_path('icons/Error/Information3.png')
-
-
-
-
-
-
-
-
-

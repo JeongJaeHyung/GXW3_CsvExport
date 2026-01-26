@@ -27,10 +27,10 @@ class Found():
             time.sleep(0.1) 
     
     @staticmethod
-    def icon_list(icon_path_list, timeout=0):
+    def icon_list(icon_path_list, timeout=DEFAULT_TIMEOUT, confidence=CONFIDENCE):
         logging.info(f"LOG: screen.Found.icon_list(icon_path_list={icon_path_list}, timeout={timeout}) called")
         for key in icon_path_list:
-            confirm_btn = Found.icon(key, timeout=timeout)
+            confirm_btn = Found.icon(key, timeout=timeout, confidence=confidence)
             if confirm_btn is not None:
                 return confirm_btn, key
         return None

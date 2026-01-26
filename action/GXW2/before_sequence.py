@@ -1,13 +1,10 @@
-from module import Waited, Get, Found
+from module import Waited, Get
 from core import ICON
-
+import time
 
 def work():
     print("LOG: before_sequence.work() called")
-    Waited.click(Get.center_location(ICON.GXW2.Navigation), 0.05)
-    Waited.key_press('up')
-    while True:
-        Waited.key_press('pageup')
-        if Found.icon(ICON.GXW2.Parameter) is not None:
-            print("--------------------------------------Project Found")
-            return
+    time.sleep(0.1)
+    Waited.click(Get.center_location(ICON.GXW2.ProjectProperty))
+    Waited.key_press('c')
+    return
