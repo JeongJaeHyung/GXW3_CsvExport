@@ -68,6 +68,8 @@ class ICON:
         Device = resource_path('icons/GXW3/ActiveClosedDevice.png')
         Comment = resource_path('icons/GXW3/ActiveDeviceComment.png')
 
+        LineChange = resource_path('icons/GXW3/LineChange.png')
+
 
     class GXW2:
         ProjectProperty = resource_path('icons/GXW2/ProjectProperty.png')

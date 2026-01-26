@@ -3,7 +3,7 @@ from module import Waited, Found
 from .file_path_setting import work as PathSetting
 
 
-def work(t_center, file_path_setted):
+def work(t_center, file_path_setted, SAVE_DIR ):
     print("LOG: export_to_csv.work() called")
     print("│  │  └─(Export to CSV Start)")
 
@@ -21,7 +21,7 @@ def work(t_center, file_path_setted):
     Waited.Found.key_press(ICON.Error.Warning1, 'left', 5, 0.8)
     Waited.key_press('enter', 0.05)
     if file_path_setted is False:
-        PathSetting()
+        PathSetting(SAVE_DIR)
     if Found.icon(ICON.Error.Warning1) is not None:
         print("│  │     ├─<CSV is already saved!>")
         Waited.key_press('enter')
@@ -30,6 +30,12 @@ def work(t_center, file_path_setted):
         Waited.key_press('enter')
         print("│  │     ├─ Success!")
 
+    while True:
+        if Found.icon(ICON.GXW3.Loading1) is not None:
+            continue
+        else:
+            break
+        
     Waited.key_press('esc', 0.1)
     Waited.hotkey_press(['ctrl', 'shift', 'q'], 0.1)
 

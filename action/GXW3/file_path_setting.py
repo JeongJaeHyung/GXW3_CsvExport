@@ -1,15 +1,13 @@
 from module import Waited, Found
 import pyperclip
-from core import ICON
 import core
 
-def work():
+
+def work(SAVE_DIR):
     print("LOG: program_export_work.work() called")
-    Waited.click(Found.icon(ICON.ETC.FilePathSetting))
     print(f"CURRENT_EXPORT_DIR : {core.CURRENT_EXPORT_DIR}")
-    pyperclip.copy(core.CURRENT_EXPORT_DIR)
+    pyperclip.copy(SAVE_DIR)
+    Found.icon(core.ICON.ETC.FilePathSetting, 5)
     Waited.hotkey_press(['ctrl', 'v'])
-    Waited.key_press('enter')
-    Waited.key_press('enter')
     Waited.key_press('enter')
     Waited.key_press('enter')
