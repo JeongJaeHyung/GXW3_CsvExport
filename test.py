@@ -1,10 +1,11 @@
-from module import Waited, Get
-import time
+import winapps
 
-from core import ICON
+app_list = [
+    "GX Works2",
+    "GX Works3"
+]
 
-time.sleep(5)
-
-while True:
-    time.sleep(0.1)
-    Waited.click(Get.center_location(ICON.GXW2.ProjectProperty))
+# 설치된 모든 앱 리스트 출력
+for app in winapps.list_installed():
+    if app.name in app_list:
+        print(f"Found {app.name}")

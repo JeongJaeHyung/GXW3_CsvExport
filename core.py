@@ -91,6 +91,7 @@ class ICON:
     
 
     class Error:
+        Danger1 = resource_path('icons/Error/Danger1.png')
         Warning1 = resource_path('icons/Error/Warning1.png')
         Warning2 = resource_path('icons/Error/Warning2.png')
         Information1 = resource_path('icons/Error/Information1.png')

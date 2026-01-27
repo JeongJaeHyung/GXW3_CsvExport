@@ -8,10 +8,9 @@ from core import ICON, NODE_OPEN_TIMEOUT
 def work():
     node_list = [
         [ICON.GXW2.GlobalDeviceComment],
-        [ICON.GXW2.PS],
-        [ICON.GXW2.Scan],
-        [ICON.GXW2.Unit, ICON.GXW2.Program1, ICON.GXW2.Program2, ICON.GXW2.POU],
-        [ICON.GXW2.PF, ICON.GXW2.Program1, ICON.GXW2.Program2],
+        [ICON.GXW2.POU],
+        [ICON.GXW2.PF],
+        [ICON.GXW2.Program1, ICON.GXW2.Program2],
         [ICON.GXW2.DeviceInitialValue]
     ]
     pointer = 0
@@ -39,10 +38,7 @@ def work():
                 pointer += 1
                 CommentExportWork(position)
                 
-            elif target in [ICON.GXW2.Unit, ICON.GXW2.PF]:
-                Just.key_press('right')
-            
-            else:
+            elif target in [ICON.GXW2.POU, ICON.GXW2.PF]:
                 Just.key_press('right')
                 pointer += 1
         
